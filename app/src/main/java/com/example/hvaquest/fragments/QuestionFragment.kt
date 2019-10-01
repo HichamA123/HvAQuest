@@ -47,16 +47,17 @@ class QuestionFragment : Fragment() {
             val radioButton = view.findViewById<RadioButton>(rgAnswers.checkedRadioButtonId)
             if (viewModel.isAnswerCorrect(radioButton.text.toString())) {
                 Toast.makeText(context, "Your answer is correct!", Toast.LENGTH_LONG).show()
+                if ((viewModel.getQuestions().size - 1) == viewModel.questionIndex) findNavController().navigate(
+                    R.id.action_questionFragment_to_questCompletedFragment
+                )
+                else findNavController().navigate(R.id.action_questionFragment_to_clueFragment)
             } else {
                 Toast.makeText(context, "Your answer is incorrect! The correct answer was: ${viewModel.getQuestion().correctAnswer}", Toast.LENGTH_LONG
                 ).show()
 
             }
 
-            if ((viewModel.getQuestions().size - 1) == viewModel.questionIndex) findNavController().navigate(
-                R.id.action_questionFragment_to_questCompletedFragment
-            )
-            else findNavController().navigate(R.id.action_questionFragment_to_clueFragment)
+
 
         }
     }
